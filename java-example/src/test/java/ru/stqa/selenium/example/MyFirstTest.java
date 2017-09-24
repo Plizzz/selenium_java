@@ -19,7 +19,6 @@ public class MyFirstTest {
 
     @Before
     public void start() {
-        System.setProperty("webdriver.chrome.driver", "/home/alex/Загрузки/chromedriver");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
     }
