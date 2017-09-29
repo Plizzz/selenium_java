@@ -22,9 +22,11 @@ public class stickersScene extends TestBase {
 
             for (int j = 0; j < ducks.size(); j++) {
                 WebElement sticker = ducks.get(j).findElement(By.className("sticker"));
+                int numOfStickers = ducks.get(j).findElements(By.className("sticker")).size();
+
                 String duckName = ducks.get(j).findElement(By.className("name")).getText();
 
-                System.out.println(duckName + " is " + sticker.getText());
+                System.out.println(duckName + " is " + sticker.getText() + ". Number of stickers: " + numOfStickers);
             }
         }
     }
