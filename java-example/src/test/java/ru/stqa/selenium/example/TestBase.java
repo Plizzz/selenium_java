@@ -9,11 +9,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 
 public class TestBase {
+    public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
     public WebDriver driver;
     public WebDriverWait wait;
 
     @Before
     public void start() {
+        if (tlDriver.get() != null) {
+            driver = tlDriver.get();
+            wait = new WebDriverWait(driver, 10);
+            return;
+        }
         //New scheme
         driver = new ChromeDriver();
         //driver = new FirefoxDriver();
@@ -28,15 +34,20 @@ public class TestBase {
           options.setBinary(new FirefoxBinary(new File("/home/alex/Tools/firefox nightly/firefox")));
           driver = new FirefoxDriver(options);
 */
-
-        wait = new WebDriverWait(driver, 10);
+        tlDriver.set(driver);
         driver.manage().window().maximize();
+
+        driver.get("http://localhost/litecart/admin/");
+        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys("admin");
+        driver.findElement(By.name("login")).click();
+
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(() -> {driver.quit(); driver = null;}));
     }
 
     @After
     public void stop() {
-        driver.quit();
-        driver = null;
     }
 
     boolean isElementPresent(WebDriver driver, By locator) {

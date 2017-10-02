@@ -8,13 +8,10 @@ import java.util.List;
 
 public class Countries extends TestBase{
 
+    // Задание №9. Часть 1
     @Test
     public void sortCountries() {
         driver.get("http://localhost/litecart/admin/?app=countries&doc=countries");
-
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("login")).click();
 
         // Количество стран
         int numOfCountries = driver.findElement(By.className("dataTable")).findElements(By.cssSelector("tr.row td:nth-child(5) a")).size();
@@ -22,6 +19,9 @@ public class Countries extends TestBase{
         int tmpCountry = 0;
         // Для проверки правильности сортировки зон
         int tmpZone = 0;
+        // Для сравнения страны
+        String country = "";
+        System.out.println("Countries:");
 
         for (int i = 0; i < numOfCountries; i++) {
             // Таблица со странами
@@ -31,48 +31,53 @@ public class Countries extends TestBase{
             // Список количества зон у стран
             List<WebElement> zonesOfCountry = tableOfCountries.findElements(By.cssSelector("tr.row td:nth-child(6)"));
 
-            //Первую страну не сравниваем
-            if (i == 0)
+            //Первую страну не сравниваем. Записываем ее в переменную country
+            if (country == "") {
+                country = countries.get(i).getText();
                 tmpCountry++;
+            }
             else {
                 // Если предыдущая страна лексикографически меньше текущей, то проверяем
                 // сортировку в прямом алфавитном порядке
-                if (countries.get(i - 1).getText().compareTo(countries.get(i).getText()) < 0) {
-                    System.out.println(countries.get(i - 1).getText() + " < " + countries.get(i).getText());
+                if (country.compareTo(countries.get(i).getText()) < 0) {
+                    country = countries.get(i).getText();
                     tmpCountry++;
                 }
             }
+            System.out.println("---"+country);
 
             // Если количество геозон отлично от 0, то кликаем по стране
             if (Integer.parseInt(zonesOfCountry.get(i).getText()) > 0) {
-                System.out.println("ZONE: "+countries.get(i).getText());
+                System.out.println("ZONES: "+country);
                 countries.get(i).click();
 
                 // Таблица геозон
                 WebElement tableOfZones = driver.findElement(By.id("table-zones"));
                 // Список геозон
-                List<WebElement> zone = tableOfZones.findElements(By.cssSelector("tr td:nth-child(3)"));
-                // Количество геозон
-                int numOfZones = zone.size();
+                List<WebElement> zones = tableOfZones.findElements(By.cssSelector("tr td:nth-child(3)"));
+                String zone = "";
+                // Количество геозон (убираем последнюю строчку, т.к. там нет информации по зонам)
+                int numOfZones = zones.size() - 1;
                 // Осуществляем проход по каждой геозоне и осуществляем проверку на
                 // правильность сортировки
-                for (int j = 0; j < numOfZones-1; j++) {
-
+                for (int j = 0; j < numOfZones; j++) {
                     if (j == 0) {
+                        zone = zones.get(j).getText();
                         tmpZone++;
                     }
                     else {
-                        if (zone.get(j-1).getText().compareTo(zone.get(j).getText()) < 0) {
-                            System.out.println("---"+zone.get(j - 1).getText() + " < " + zone.get(j).getText());
+                        if (zone.compareTo(zones.get(j).getText()) < 0) {
+                            zone = zones.get(j).getText();
                             tmpZone++;
                         }
                     }
+                    System.out.println("------"+zone);
                 }
-                if (tmpZone == numOfZones-1) {
-                    System.out.println("Zones are arranged in alphabetical order");
+                if (tmpZone == numOfZones) {
+                    System.out.println("Zones are arranged in alphabetical order\n");
                 }
                 else {
-                    System.out.println("Zones are not in alphabetical order");
+                    System.out.println("Zones are not in alphabetical order\n");
                 }
                 tmpZone = 0;
                 // После прохода по геозонам, возвращаемся назад
@@ -80,7 +85,7 @@ public class Countries extends TestBase{
             }
         }
 
-        // Если tmp равен количеству стран, то все страны отсортированы в алфавтном порядке
+        // Если tmpCountry равен количеству стран, то все страны отсортированы в алфавтном порядке
         if (tmpCountry == numOfCountries){
             System.out.println("Countries are arranged in alphabetical order");
         }
@@ -90,30 +95,57 @@ public class Countries extends TestBase{
 
     }
 
-//    @Test
-//    public void sortZones() {
-//        driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
-//        driver.findElement(By.name("username")).sendKeys("admin");
-//        driver.findElement(By.name("password")).sendKeys("admin");
-//        driver.findElement(By.name("login")).click();
-//        WebElement tableOfCountries = driver.findElement(By.className("dataTable"));
-//
-//        int numOfCoutries = tableOfCountries.findElements(By.cssSelector("tr.row td:nth-child(3) a")).size();
-//
-//        for (int i = 0; i < numOfCoutries; i++) {
-//            List<WebElement> countries = tableOfCountries.findElements(By.cssSelector("tr.row td:nth-child(3) a"));
-//
-//            countries.get(i).click();
-//
-//            WebElement tableOfGeoZones = driver.findElement(By.id("table-zones"));
-//            int numOfZones = tableOfGeoZones.findElements(By.cssSelector("td:nth-child(3)")).size();
-//
-//            List<WebElement> Zones = tableOfGeoZones.findElements(By.cssSelector("td:nth-child(3) option"));
-//            for (int j = 0; j < numOfZones; j++) {
-//                System.out.println(Zones.get(j).getText());
-//
-//            }
-//        }
-//
-//    }
+    // Задание №9. Часть 2
+    @Test
+    public void sortZones() {
+        driver.get("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+
+        // Количество стран
+        int numOfCountries = driver.findElement(By.className("dataTable")).findElements(By.cssSelector("tr.row td:nth-child(3) a")).size();
+        // Заходим в каждую страну и ищем геозоны
+        for (int i = 0; i < numOfCountries; i++) {
+            // Таблица со странами
+            WebElement tableOfCountries = driver.findElement(By.className("dataTable"));
+            // Список стран
+            List<WebElement> countries = tableOfCountries.findElements(By.cssSelector("tr.row td:nth-child(3) a"));
+
+            System.out.println(countries.get(i).getText()+":");
+            countries.get(i).click();
+            // Для проверки правильности сортировки
+            int tmpZone = 0;
+            // Таблица геозон
+            WebElement tableOfGeoZones = driver.findElement(By.id("table-zones"));
+            // Количество геозон
+            int numOfZones = tableOfGeoZones.findElements(By.cssSelector("td:nth-child(3)")).size();
+            // Для сравнения геозон
+            String selectedZone = "";
+            // Рассмотрим каждую геозону и сравним ее с предыдущей
+            for (int j = 0; j < numOfZones; j++) {
+                // Список геозон
+                List<WebElement> zones = tableOfGeoZones.findElements(By.cssSelector("td:nth-child(3)"));
+                // Выбранная геозона
+                WebElement options = zones.get(j).findElement(By.cssSelector("option[selected]"));
+                // Если первый обход по циклу, то записываем первое значение и переходим на следующий
+                if (selectedZone == "") {
+                    selectedZone = options.getText();
+                    tmpZone++;
+                }
+                else {
+                    if (selectedZone.compareTo(options.getText()) < 0) {
+                                selectedZone = options.getText();
+                                tmpZone++;
+                            }
+                }
+                System.out.println("---"+selectedZone);
+            }
+            
+            if (tmpZone == numOfZones) {
+                System.out.println("Zones are arranged in alphabetical order\n");
+            }
+            else{
+                System.out.println("Zones are not in alphabetical order\n");
+            }
+            driver.navigate().back();
+        }
+    }
 }
