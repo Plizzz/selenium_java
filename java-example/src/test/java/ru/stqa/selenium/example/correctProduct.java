@@ -21,11 +21,11 @@ public class correctProduct extends TestBase {
         String campaignPrice1 = campaignPrice.getText();
 
         String colorOfRegularPrice1 = regularPrice.getCssValue("color");
-        String s1 = colorOfRegularPrice1.substring(5);
+        String s1 = colorOfRegularPrice1.substring(colorOfRegularPrice1.indexOf("(")+1);
         StringTokenizer stringTokenizer1 = new StringTokenizer(s1);
         int r = Integer.parseInt(stringTokenizer1.nextToken(",").trim());
         int g = Integer.parseInt(stringTokenizer1.nextToken(",").trim());
-        int b = Integer.parseInt(stringTokenizer1.nextToken(",").trim());
+        int b = Integer.parseInt(stringTokenizer1.nextToken(",)").trim());
         if ((r == g) && (g == b))
             s1 = "Color of regular price in the mainpage is gray";
         else
@@ -38,11 +38,11 @@ public class correctProduct extends TestBase {
         float sizeOfRegularPrice1 = Float.parseFloat(fr1.nextToken("p").trim());
 
         String colorOfCampaignPrice1 = campaignPrice.getCssValue("color");
-        String s2 = colorOfCampaignPrice1.substring(5);
+        String s2 = colorOfCampaignPrice1.substring(colorOfCampaignPrice1.indexOf("(")+1);
         StringTokenizer stringTokenizer2 = new StringTokenizer(s2);
         r = Integer.parseInt(stringTokenizer2.nextToken(",").trim());
         g = Integer.parseInt(stringTokenizer2.nextToken(",").trim());
-        b = Integer.parseInt(stringTokenizer2.nextToken(",").trim());
+        b = Integer.parseInt(stringTokenizer2.nextToken(",)").trim());
         if ((r != 0) && (g == 0) && (b == 0)) {
             s2 = "Color of campaign price in the mainpage is red";
         }
@@ -68,11 +68,11 @@ public class correctProduct extends TestBase {
         String campaignPrice2 = campaignPrice.getText();
 
         String colorOfRegularPrice2 = regularPrice.getCssValue("color");
-        String s3 = colorOfRegularPrice2.substring(5);
+        String s3 = colorOfRegularPrice2.substring(colorOfRegularPrice2.indexOf("(")+1);
         StringTokenizer stringTokenizer3 = new StringTokenizer(s3);
         r = Integer.parseInt(stringTokenizer3.nextToken(",").trim());
         g = Integer.parseInt(stringTokenizer3.nextToken(",").trim());
-        b = Integer.parseInt(stringTokenizer3.nextToken(",").trim());
+        b = Integer.parseInt(stringTokenizer3.nextToken(",)").trim());
         if ((r == g) && (g == b))
             s3 = "Color of regular price in the productpage is gray";
         else
@@ -85,11 +85,11 @@ public class correctProduct extends TestBase {
         float sizeOfRegularPrice2 = Float.parseFloat(fr2.nextToken("p").trim());
 
         String colorOfCampaignPrice2 = campaignPrice.getCssValue("color");
-        String s4 = colorOfCampaignPrice2.substring(5);
+        String s4 = colorOfCampaignPrice2.substring(colorOfCampaignPrice2.indexOf("(")+1);
         StringTokenizer stringTokenizer4 = new StringTokenizer(s4);
         r = Integer.parseInt(stringTokenizer4.nextToken(",").trim());
         g = Integer.parseInt(stringTokenizer4.nextToken(",").trim());
-        b = Integer.parseInt(stringTokenizer4.nextToken(",").trim());
+        b = Integer.parseInt(stringTokenizer4.nextToken(",)").trim());
 
         if ((r != 0) && (g == 0) && (b == 0)) {
             s4 = "Color of campaign price in the productpage is red";
