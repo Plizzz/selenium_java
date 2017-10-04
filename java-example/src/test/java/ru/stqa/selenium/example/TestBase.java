@@ -37,10 +37,13 @@ public class TestBase {
         tlDriver.set(driver);
         driver.manage().window().maximize();
 
-        driver.get("http://localhost/litecart/admin/");
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("login")).click();
+        driver.get("http://localhost/litecart/");
+        // For the registration form
+        driver.findElement(By.cssSelector("div.content tr:nth-child(5) a")).click();
+
+//        driver.findElement(By.name("username")).sendKeys("admin");
+//        driver.findElement(By.name("password")).sendKeys("admin");
+//        driver.findElement(By.name("login")).click();
 
         Runtime.getRuntime().addShutdownHook(
                 new Thread(() -> {driver.quit(); driver = null;}));
@@ -52,5 +55,20 @@ public class TestBase {
 
     boolean isElementPresent(WebDriver driver, By locator) {
         return driver.findElements(locator).size() > 0;
+    }
+
+    // Constant string from which we take random characters
+    private static final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                                                       "abcdefghijklmnopqrstuvwxyz" +
+                                                       "0123456789";
+    // A function that generates a random character set.
+    // Specify the length of a string as a parameter
+    public static String randomAlphaNumeric(int count) {
+        StringBuilder builder = new StringBuilder();
+        while (count-- != 0) {
+            int character = (int)(Math.random()*ALPHA_NUMERIC_STRING.length());
+            builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+        }
+        return builder.toString();
     }
 }
