@@ -38,8 +38,6 @@ public class TestBase {
         driver.manage().window().maximize();
 
         driver.get("http://localhost/litecart/");
-        // For the registration form
-        driver.findElement(By.cssSelector("div.content tr:nth-child(5) a")).click();
 
 //        driver.findElement(By.name("username")).sendKeys("admin");
 //        driver.findElement(By.name("password")).sendKeys("admin");

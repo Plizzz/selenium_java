@@ -7,6 +7,8 @@ public class RegistrationForm extends TestBase {
 
     @Test
     public void regForm() {
+        driver.findElement(By.cssSelector("div.content tr:nth-child(5) a")).click();
+
         // Случайное значение для LastName
         String randValue = randomAlphaNumeric(5);
 
