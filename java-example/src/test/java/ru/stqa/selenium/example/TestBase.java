@@ -37,11 +37,11 @@ public class TestBase {
         tlDriver.set(driver);
         driver.manage().window().maximize();
 
-        driver.get("http://localhost/litecart/");
+        driver.get("http://localhost/litecart/admin/");
 
-//        driver.findElement(By.name("username")).sendKeys("admin");
-//        driver.findElement(By.name("password")).sendKeys("admin");
-//        driver.findElement(By.name("login")).click();
+        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys("admin");
+        driver.findElement(By.name("login")).click();
 
         Runtime.getRuntime().addShutdownHook(
                 new Thread(() -> {driver.quit(); driver = null;}));
