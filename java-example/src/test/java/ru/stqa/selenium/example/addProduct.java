@@ -2,7 +2,6 @@ package ru.stqa.selenium.example;
 
 import org.junit.Test;
 import org.openqa.selenium.*;
-
 import java.io.File;
 
 public class addProduct extends TestBase {
@@ -24,8 +23,6 @@ public class addProduct extends TestBase {
 
         WebElement code = generalTab.findElement(By.cssSelector("tr:nth-child(3)"));
         code.findElement(By.tagName("input")).sendKeys(randomAlphaNumeric(5));
-
-        //WebElement categories = generalTab.findElement(By.cssSelector("tr:nth-child(4)"));
 
         WebElement prodGroups = generalTab.findElement(By.cssSelector("tr:nth-child(7) table"));
         prodGroups.findElement(By.cssSelector("tr:nth-child(4) input[type=\"checkbox\"]")).click();
@@ -80,5 +77,34 @@ public class addProduct extends TestBase {
         metaDesc.sendKeys("Pinguin");
 
         driver.findElement(By.cssSelector(".index li:nth-child(4) a")).click();
+
+        WebElement pricesTab = driver.findElement(By.id("tab-prices"));
+
+        WebElement purchasePrice = pricesTab.findElement(By.cssSelector("tr input"));
+        purchasePrice.clear();
+        purchasePrice.sendKeys("10");
+
+        WebElement numOfPurchasePrice = pricesTab.findElement(By.cssSelector("tr select"));
+        numOfPurchasePrice.click();
+        numOfPurchasePrice.findElement(By.cssSelector("option[value=\"USD\"]")).click();
+
+        WebElement priceUSD = pricesTab.findElement(By.cssSelector("table:nth-child(4)"));
+        priceUSD.findElement(By.tagName("input")).sendKeys("20");
+
+        WebElement priceEURO = priceUSD.findElement(By.cssSelector("table:nth-child(4) tr:nth-child(3)"));
+        priceEURO.findElement(By.tagName("input")).sendKeys("0");
+
+        driver.findElement(By.cssSelector("button[name=\"save\"]")).click();
+
+        WebElement searchForm = driver.findElement(By.cssSelector("input[name=\"query\"]"));
+        searchForm.sendKeys("Super Product");
+        searchForm.sendKeys(Keys.ENTER);
+
+        WebElement dataTable = driver.findElement(By.className("dataTable"));
+        WebElement superProd = dataTable.findElement(By.className("row"));
+
+        if(superProd.findElement(By.cssSelector("td:nth-child(3) a")).getText().matches("Super Product")) {
+            System.out.println("Super Product has been added to the catalog");
+        }
     }
 }
