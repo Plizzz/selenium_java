@@ -22,6 +22,7 @@ public class TestBase {
         }
         //New scheme
         driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 10);
         //driver = new FirefoxDriver();
 
 /*        //Old scheme with Firefox ESR
