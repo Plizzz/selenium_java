@@ -10,12 +10,6 @@ public class menuClick extends TestBase {
     @Test
     public void Test1() {
 
-        driver.get("http://localhost/litecart/admin");
-
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.name("login")).click();
-
         int numOfEl = driver.findElements(By.id("app-")).size();
         int row;
 
