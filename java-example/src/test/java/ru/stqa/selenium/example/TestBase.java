@@ -5,8 +5,12 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
+
+import javax.annotation.Nullable;
+import java.util.Set;
 
 public class TestBase {
     public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
@@ -70,4 +74,19 @@ public class TestBase {
         }
         return builder.toString();
     }
+
+    // Waiting for a new window to appear
+    public ExpectedCondition <String> thereIsWindowOtherThan(Set<String> oldWindows) {
+      return new ExpectedCondition<String>() {
+          @Nullable
+          @Override
+          public String apply(@Nullable WebDriver driver) {
+              Set<String> handles = driver.getWindowHandles();
+              handles.removeAll(oldWindows);
+
+              return handles.size() > 0 ? handles.iterator().next() : null;
+          }
+      };
+    }
+
 }
