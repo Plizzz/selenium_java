@@ -2,14 +2,19 @@ package ru.stqa.selenium.example;
 
 import org.junit.After;
 import org.junit.Before;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
 
 import javax.annotation.Nullable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Set;
 
 public class TestBase {
@@ -25,6 +30,18 @@ public class TestBase {
             return;
         }
         //New scheme
+//        Remote Control
+//        try {
+//            DesiredCapabilities capability = new DesiredCapabilities();
+//            capability.setBrowserName("firefox");
+//            capability.setVersion("56");
+//            capability.setPlatform(Platform.MAC);
+//
+//            driver = new RemoteWebDriver(new URL("https://alexander1228:U4Hjai4Vq5MEHBNxHxnH@hub-cloud.browserstack.com/wd/hub"), capability);
+//        }
+//        catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 10);
         //driver = new FirefoxDriver();
