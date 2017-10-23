@@ -1,4 +1,4 @@
-package ru.stqa.selenium.example.pages;
+package ru.stqa.selenium.example.RegistrationPageObject.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;

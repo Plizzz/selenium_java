@@ -1,4 +1,4 @@
-package ru.stqa.selenium.example.pages;
+package ru.stqa.selenium.example.RegistrationPageObject.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toSet;
 

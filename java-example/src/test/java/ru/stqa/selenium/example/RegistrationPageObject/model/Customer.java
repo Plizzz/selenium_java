@@ -1,4 +1,4 @@
-package ru.stqa.selenium.example.model;
+package ru.stqa.selenium.example.RegistrationPageObject.model;
 
 public class Customer {
 

@@ -1,7 +1,7 @@
-package ru.stqa.selenium.example.tests;
+package ru.stqa.selenium.example.RegistrationPageObject.tests;
 
 import com.tngtech.java.junit.dataprovider.DataProvider;
-import ru.stqa.selenium.example.model.Customer;
+import ru.stqa.selenium.example.RegistrationPageObject.model.Customer;
 
 public class DataProviders {
 

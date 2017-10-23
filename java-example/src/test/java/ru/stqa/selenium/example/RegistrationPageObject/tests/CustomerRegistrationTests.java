@@ -1,10 +1,10 @@
-package ru.stqa.selenium.example.tests;
+package ru.stqa.selenium.example.RegistrationPageObject.tests;
 
 import com.tngtech.java.junit.dataprovider.DataProviderRunner;
 import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import ru.stqa.selenium.example.model.Customer;
+import ru.stqa.selenium.example.RegistrationPageObject.model.Customer;
 
 import java.util.Set;
 

@@ -1,11 +1,11 @@
-package ru.stqa.selenium.example.app;
+package ru.stqa.selenium.example.RegistrationPageObject.app;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import ru.stqa.selenium.example.model.Customer;
-import ru.stqa.selenium.example.pages.AdminPanelLoginPage;
-import ru.stqa.selenium.example.pages.CustomerListPage;
-import ru.stqa.selenium.example.pages.RegistrationPage;
+import ru.stqa.selenium.example.RegistrationPageObject.model.Customer;
+import ru.stqa.selenium.example.RegistrationPageObject.pages.AdminPanelLoginPage;
+import ru.stqa.selenium.example.RegistrationPageObject.pages.CustomerListPage;
+import ru.stqa.selenium.example.RegistrationPageObject.pages.RegistrationPage;
 
 import java.util.Set;
 

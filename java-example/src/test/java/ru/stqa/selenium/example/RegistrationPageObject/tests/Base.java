@@ -1,7 +1,7 @@
-package ru.stqa.selenium.example.tests;
+package ru.stqa.selenium.example.RegistrationPageObject.tests;
 
 import org.junit.Before;
-import ru.stqa.selenium.example.app.Application;
+import ru.stqa.selenium.example.RegistrationPageObject.app.Application;
 
 public class Base {
     public static ThreadLocal<Application> tlApp = new ThreadLocal<>();
